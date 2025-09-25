@@ -20,7 +20,7 @@ protected:
 
     void TearDown() override
     {
-        // kod wykonywany po każdym teście (opcjonalnie)
+        // kod wykonywany po każdym teście
         data.clear();
     }
 };
@@ -40,18 +40,18 @@ TEST_F(MyFixture, FirstElementIsZero)
 }
 
 // 3) TEST_P + INSTANTIATE_TEST_CASE_P – testy parametryzowane
-typedef std::tuple<int, bool> IntBoolPair;
-class ParityTest : public ::testing::TestWithParam<IntBoolPair>
+typedef std::tuple<int, bool> testParams;
+class ParityTest : public ::testing::TestWithParam<testParams>
 {
 };
 
 // clang-format off
 INSTANTIATE_TEST_CASE_P(ParityChecks, ParityTest, 
 ::testing::Values(
-                    IntBoolPair(0, true)
-                    , IntBoolPair(1, false)
-                    , IntBoolPair(42, true)
-                    , IntBoolPair(17, false)
+                    testParams(0, true)
+                    , testParams(1, false)
+                    , testParams(42, true)
+                    , testParams(17, false)
 ));
 // clang-format on
 
