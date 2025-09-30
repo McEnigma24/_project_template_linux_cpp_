@@ -48,11 +48,6 @@ set(LINK_FLAGS "${LINK_FLAGS} -m64")
 
 
 # 1 - core #
-set(_OLD_BUILD_LIBRARY "${BUILD_LIBRARY}")         # made to not let the sub-build overwrite the flag 
-set(_OLD_CTEST_ACTIVE "${CTEST_ACTIVE}")           # (problem only then Cmake uses flags of the same name)
-                                                   # with cmake 3.25 you could use block() { FetchContent_MakeAvailable } endblock()
-
-set(CTEST_ACTIVE "OFF")
 
 include(FetchContent)
 FetchContent_Declare(
@@ -64,9 +59,6 @@ FetchContent_MakeAvailable(core)
 
 set(ALL_LIBRARIES ${ALL_LIBRARIES} core)
 include_directories(${core_SOURCE_DIR}/_inc)
-
-set(CTEST_ACTIVE "${_OLD_CTEST_ACTIVE}")
-set(BUILD_LIBRARY "${_OLD_BUILD_LIBRARY}")
 
 
 
@@ -95,9 +87,9 @@ set(BUILD_LIBRARY "${_OLD_BUILD_LIBRARY}")
 
 set(CONST_TARGET_NAME "TEMPLATE")
 
-option(BUILD_LIBRARY "Build library instead of executable" OFF) # default value - could be overwritten by provided FLAG
+option(TEMPLATE___BUILD_LIBRARY "Build library instead of executable" OFF) # default value - could be overwritten by provided FLAG
 
-if(BUILD_LIBRARY)
+if(TEMPLATE___BUILD_LIBRARY)
     message(WARNING "Building library")
     
     set(TARGET_NAME "${CONST_TARGET_NAME}")
@@ -115,9 +107,9 @@ else()
     target_link_libraries(${TARGET_NAME} PUBLIC ${ALL_LIBRARIES})
 endif()
 
-option(CTEST_ACTIVE "Testing is active" OFF)  # default value - could be overwritten by provided FLAG
+option(TEMPLATE___CTEST_ACTIVE "Testing is active" OFF)  # default value - could be overwritten by provided FLAG
 
-if(CTEST_ACTIVE)
+if(TEMPLATE___CTEST_ACTIVE)
     message(WARNING "TESTING...")
     # Włączenie testów
     enable_testing()
