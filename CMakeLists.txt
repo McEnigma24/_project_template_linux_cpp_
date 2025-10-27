@@ -23,6 +23,11 @@ aux_source_directory(_test TEST_SOURCES)
 string(LENGTH "${CMAKE_SOURCE_DIR}/" SOURCE_PATH_SIZE)
 add_definitions(-DSOURCE_PATH_SIZE=${SOURCE_PATH_SIZE})
 
+# Change names of:
+# TEMPLATE___CTEST_ACTIVE
+# TEMPLATE___BUILD_LIBRARY
+
+set(CONST_TARGET_NAME "TEMPLATE")
 
 # COMPILER FLAGS #
 
@@ -84,8 +89,6 @@ include_directories(${core_SOURCE_DIR}/_inc)
 # set(ALL_LIBRARIES ${ALL_LIBRARIES} ssd1306) # dodajemy do glownego EXE
 
 
-
-set(CONST_TARGET_NAME "TEMPLATE")
 
 option(TEMPLATE___BUILD_LIBRARY "Build library instead of executable" OFF) # default value - could be overwritten by provided FLAG
 
