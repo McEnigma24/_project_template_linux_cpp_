@@ -40,16 +40,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wfatal-errors -Werror=uninitialized 
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -w")                                                         # for release
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mavx2")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mavx2")
 
 #                                                                  https://hjlebbink.github.io/x86doc/
 #                                                                  - look for *.o file
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -S") # ASSEMBLY
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -S -fverbose-asm") # ASSEMBLY with comments
 
-set(COMPILE_FLAGS "${COMPILE_FLAGS} -m64")
-set(LINK_FLAGS "${LINK_FLAGS} -m64")
 
+# set(COMPILE_FLAGS "${COMPILE_FLAGS} -m64")
+# set(LINK_FLAGS "${LINK_FLAGS} -m64")
 
 
 # 1 - core #
@@ -98,7 +98,7 @@ if(TEMPLATE___BUILD_LIBRARY)
     set(TARGET_NAME "${CONST_TARGET_NAME}")
     add_library(${TARGET_NAME} SHARED ${SOURCES})
     target_compile_definitions(${TARGET_NAME} PRIVATE LINUX)
-    set_target_properties(${TARGET_NAME} PROPERTIES ${COMPILE_FLAGS} ${LINK_FLAGS})
+    # set_target_properties(${TARGET_NAME} PROPERTIES ${COMPILE_FLAGS} ${LINK_FLAGS})
     target_link_libraries(${TARGET_NAME} PUBLIC ${ALL_LIBRARIES})
 else()
     message(WARNING "Building exe")
@@ -106,7 +106,7 @@ else()
     set(TARGET_NAME "${CONST_TARGET_NAME}.exe")
     add_executable(${TARGET_NAME} ${SOURCES})
     target_compile_definitions(${TARGET_NAME} PRIVATE LINUX BUILD_EXECUTABLE)
-    set_target_properties(${TARGET_NAME} PROPERTIES ${COMPILE_FLAGS} ${LINK_FLAGS})
+    # set_target_properties(${TARGET_NAME} PROPERTIES ${COMPILE_FLAGS} ${LINK_FLAGS})
     target_link_libraries(${TARGET_NAME} PUBLIC ${ALL_LIBRARIES})
 endif()
 
